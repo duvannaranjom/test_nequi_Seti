@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - franquicias-network
+    environment:
+      - MONGO_INITDB_DATABASE=franquicias_db
+
+  franquicias-api:
+    build: .
+    container_name: franquicias-api
+    depends_on:
+      - mongodb
+    ports:
+      - "8080:8080"
+    networks:
+      - franquicias-network
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongodb
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=franquicias_db
+
+networks:
+  franquicias-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
