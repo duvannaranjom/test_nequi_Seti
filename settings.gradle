@@ -1,0 +1,5 @@
+rootProject.name = 'test_nequi_Seti'
+include 'application', 'domain:model', 'domain:usecase',
+        'infrastructure:entry-points:reactive-web',
+        'infrastructure:driven-adapters:mongo-reactive',
+        'infrastructure:helpers:common'
