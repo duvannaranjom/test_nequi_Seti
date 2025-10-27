@@ -108,6 +108,8 @@ Una vez ejecutada la aplicación:
 ---
 
 ## 💻 Ejemplos con cURL
+Existe en la carpeta /curls/SETINEQUI.postman_collection.json
+todos los curls del api con datos de prueba
 
 ## 📄 Ejemplo de request
 

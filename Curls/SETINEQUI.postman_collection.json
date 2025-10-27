@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "cc6b45d4-654d-4cf7-be14-8777318ca234",
+		"name": "SETINEQUI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7060274"
+	},
+	"item": [
+		{
+			"name": "createFranchese",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"franq-003\",\r\n  \"name\": \"Franquicia FitLife Market\",\r\n  \"branches\": [\r\n    {\r\n      \"id\": \"suc-005\",\r\n      \"name\": \"Sucursal Parque Bolívar\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-012\",\r\n          \"name\": \"Batido Proteico de Vainilla\",\r\n          \"stock\": 75\r\n        },\r\n        {\r\n          \"id\": \"prod-013\",\r\n          \"name\": \"Barra Energética Natural\",\r\n          \"stock\": 120\r\n        },\r\n        {\r\n          \"id\": \"prod-014\",\r\n          \"name\": \"Agua de Coco 500ml\",\r\n          \"stock\": 200\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"suc-006\",\r\n      \"name\": \"Sucursal San Antonio\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-015\",\r\n          \"name\": \"Suplemento de Colágeno\",\r\n          \"stock\": 40\r\n        },\r\n        {\r\n          \"id\": \"prod-016\",\r\n          \"name\": \"Proteína Vegana Chocolate\",\r\n          \"stock\": 60\r\n        },\r\n        {\r\n          \"id\": \"prod-017\",\r\n          \"name\": \"Galletas de Avena Fit\",\r\n          \"stock\": 150\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createFranchese Fail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Franquicia FitLife Market\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addBranchToFranchise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n      \"id\": \"suc-007\",\r\n      \"name\": \"Sucursal Parque Bolívar\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-018\",\r\n          \"name\": \"Batido Proteico de Vainilla\",\r\n          \"stock\": 75\r\n        },\r\n        {\r\n          \"id\": \"prod-019\",\r\n          \"name\": \"Barra Energética Natural\",\r\n          \"stock\": 120\r\n        },\r\n        {\r\n          \"id\": \"prod-020\",\r\n          \"name\": \"Agua de Coco 500ml\",\r\n          \"stock\": 200\r\n        }\r\n      ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003/branches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-003",
+						"branches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProductToBranch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"id\": \"prod-019\",\r\n          \"name\": \"Batido Proteico de Chocolate\",\r\n          \"stock\": 12\r\n          }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003/branches/suc-004/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-003",
+						"branches",
+						"suc-004",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateNameFranchese",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Franquicia FitLife CC2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-004/name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-004",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateNameBranch",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Sucursal San Antonio2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-004/branches/suc-006/name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-004",
+						"branches",
+						"suc-006",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateNameProduct",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Proteína Vegana Chocolate2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-004/branches/suc-006/products/prod-016/name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-004",
+						"branches",
+						"suc-006",
+						"products",
+						"prod-016",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCountProduct",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"count\": \"10\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-004/branches/suc-006/products/prod-016/count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-004",
+						"branches",
+						"suc-006",
+						"products",
+						"prod-016",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllFranchese",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFrancheseById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-003"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsWithMostStockByBranch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003/products/mas-stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-003",
+						"products",
+						"mas-stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteFranchese",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-0044",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-0044"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBranchOfFranchise",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003/branches/suc-007",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-003",
+						"branches",
+						"suc-007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProductOfBranch",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003/branches/suc-006/products/prod-019",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchese",
+						"franq-003",
+						"branches",
+						"suc-006",
+						"products",
+						"prod-019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateFranchese",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"franq-004\",\r\n    \"name\": \"Franquicia FitLife CC\",\r\n    \"branches\": [\r\n        {\r\n            \"id\": \"suc-005\",\r\n            \"name\": \"Sucursal Parque Avenida America\",\r\n            \"products\": [\r\n                {\r\n                    \"id\": \"prod-012\",\r\n                    \"name\": \"Batido Proteico de Vainilla\",\r\n                    \"stock\": 95\r\n                },\r\n                {\r\n                    \"id\": \"prod-013\",\r\n                    \"name\": \"Barra Energética Natural\",\r\n                    \"stock\": 120\r\n                },\r\n                {\r\n                    \"id\": \"prod-014\",\r\n                    \"name\": \"Agua de Coco 500ml\",\r\n                    \"stock\": 200\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"suc-006\",\r\n            \"name\": \"Sucursal San Antonio\",\r\n            \"products\": [\r\n                {\r\n                    \"id\": \"prod-015\",\r\n                    \"name\": \"Suplemento de Colágeno\",\r\n                    \"stock\": 40\r\n                },\r\n                {\r\n                    \"id\": \"prod-016\",\r\n                    \"name\": \"Proteína Vegana Chocolate\",\r\n                    \"stock\": 60\r\n                },\r\n                {\r\n                    \"id\": \"prod-017\",\r\n                    \"name\": \"Galletas de Avena Fit\",\r\n                    \"stock\": 150\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reactive/franquicias/franq-004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reactive",
+						"franquicias",
+						"franq-004"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
