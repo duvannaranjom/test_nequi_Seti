@@ -1,15 +1,18 @@
-# API de Gestión de Franchese
+# Proyecto Reactivo - Gestión de Franchese (Clean Architecture)
 
-Este proyecto implementa una **API RESTful Reactiva** para la gestión de *franchese*, sus *branches* (sucursales) y *products*, siguiendo una **arquitectura hexagonal** y principios **SOLID**.
+Este proyecto implementa una **API Reactiva** para la gestión de *Franchese*, *Branches* (sucursales) y *Products*, basada en la **Arquitectura Limpia (Clean Architecture)** propuesta por **Bancolombia**, con **Spring WebFlux**, **MongoDB Reactivo** y **JaCoCo** para cobertura de pruebas.
 
 ## 🚀 Características principales
 
-* **Arquitectura Hexagonal**: Separación clara entre dominio, aplicación e infraestructura.
-* **Programación Reactiva**: Basada en Project Reactor (Mono y Flux) para operaciones no bloqueantes.
-* **MongoDB**: Persistencia de datos reactiva.
-* **Spring WebFlux**: Framework base para endpoints no bloqueantes.
-* **Validaciones con Jakarta Validation** (`@Valid`, `@NotBlank`, `@Min`).
-* **Mappers DTO → Domain → DTO** con MapStruct.
+- 🧩 **Arquitectura Limpia Modularizada** (Dominio, Casos de Uso, Infraestructura, Entradas/Salidas).
+- ⚡ **Spring WebFlux** con Project Reactor (Mono / Flux).
+- 🗄️ **MongoDB Reactivo** como base de datos.
+- 🧠 **Validaciones con Jakarta Validation** (`@Valid`, `@NotBlank`, `@Min`).
+- 🧭 **MapStruct** para mapear DTOs ↔ Entidades de dominio.
+- 🧪 **JUnit 5 + Mockito + Reactor Test** para pruebas unitarias.
+- 📊 **JaCoCo** integrado para cobertura de código (>80%).
+- 🧰 **Docker Compose** para levantar MongoDB y la app.
+- 🧾 **GlobalExceptionHandler** centralizado para manejar errores.
 * **Logs estructurados con SLF4J.**
 
 ---
@@ -26,20 +29,22 @@ Este proyecto implementa una **API RESTful Reactiva** para la gestión de *franc
 ## 🧩 Estructura del proyecto
 
 ```
-src/main/java/com/seti/nequi/test/Nequi/Test/
-├── application
-│   ├── ports
-│   │   ├── input (servicios de dominio)
-│   │   └── output (repositorios)
-│   └── services (casos de uso)
-├── domain
-│   └── model (entidades de negocio)
-├── infrastructure
-│   ├── adapters
-│   │   ├── input/rest (controladores)
-│   │   └── output/persistence (repositorios)
-│   └── config (configuración general)
-└── NequiTestApplication.java
+test_nequi_Seti/
+├── domain/                           # Reglas de negocio puras
+│   ├── model/                        # Entidades y excepciones de dominio
+│   └── usecase/                      # Casos de uso (aplicación)
+│
+├── infrastructure/
+│   ├── driven-adapters/              # Adaptadores hacia el exterior
+│   │   └── mongo-repository/         # Implementaciones reactivas (MongoDB)
+│   └── entry-points/                 # Entradas al sistema
+│       └── webflux-rest/             # Controladores REST (Spring WebFlux)
+│
+├── application/app-service/                      # Orquestador (Spring Boot Application)
+│   ├── src/main/java/com/seti/nequi/test/appservice/NequiTestApplication.java
+│   └── resources/application.yml
+│
+└── pom.xml                           # Proyecto multimódulo Maven
 ```
 
 ---
@@ -68,92 +73,107 @@ Una vez ejecutada la aplicación:
 
 ## 🌍 Endpoints disponibles
 
-### Franchese (entidad principal)
+### Endpoints
 
-```
-POST   /api/v1/reactive/franchese                          → Crear una franchese
-GET    /api/v1/reactive/franchese                          → Obtener todas las franchese
-GET    /api/v1/reactive/franchese/{franchiseId}            → Obtener franchese por ID
-PUT    /api/v1/reactive/franchese/{franchiseId}            → Actualizar franchese
-DELETE /api/v1/reactive/franchese/{franchiseId}            → Eliminar franchese
-```
+#### 🧱 Franchese
+| Método | Endpoint | Descripción |
+|--------|-----------|-------------|
+| `POST` | `/api/v1/franchese` | Crear una nueva franquicia |
+| `GET`  | `/api/v1/franchese` | Listar todas las franquicias |
+| `GET`  | `/api/v1/franchese/{id}` | Obtener franquicia por ID |
+| `PATCH` | `/api/v1/franchese/{id}/name` | Actualizar nombre de franquicia |
+| `DELETE` | `/api/v1/franchese/{id}` | Eliminar una franquicia |
 
-### Actualización de nombres
+#### 🏢 Branch
+| Método | Endpoint | Descripción |
+|--------|-----------|-------------|
+| `POST` | `/api/v1/franchese/{franchiseId}/branches` | Agregar una sucursal |
+| `PATCH` | `/api/v1/franchese/{franchiseId}/branches/{branchId}/name` | Actualizar nombre de sucursal |
+| `DELETE` | `/api/v1/franchese/{franchiseId}/branches/{branchId}` | Eliminar una sucursal |
 
-```
-PATCH  /api/v1/reactive/franchese/{franchiseId}/nombre                         → Actualizar nombre de franchese
-PATCH  /api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/nombre     → Actualizar nombre de branch
-PATCH  /api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/products/{productId}/nombre → Actualizar nombre de producto
-```
+#### 📦 Product
+| Método | Endpoint | Descripción |
+|--------|-----------|-------------|
+| `POST` | `/api/v1/franchese/{franchiseId}/branches/{branchId}/products` | Agregar un producto |
+| `PATCH` | `/api/v1/franchese/{franchiseId}/branches/{branchId}/products/{productId}/name` | Actualizar nombre del producto |
+| `PATCH` | `/api/v1/franchese/{franchiseId}/branches/{branchId}/products/{productId}/count` | Actualizar cantidad del producto |
+| `DELETE` | `/api/v1/franchese/{franchiseId}/branches/{branchId}/products/{productId}` | Eliminar un producto |
 
-### Branch (sucursal)
+#### 📊 Reporte
+| Método | Endpoint | Descripción |
+|--------|-----------|-------------|
+| `GET` | `/api/v1/franchese/{franchiseId}/products/max-stock` | Productos con mayor stock por sucursal |
 
-```
-POST   /api/v1/reactive/franchese/{franchiseId}/branches                      → Agregar branch
-DELETE /api/v1/reactive/franchese/{franchiseId}/branches/{branchId}           → Eliminar branch
-```
-
-### Product (producto)
-
-```
-POST   /api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/products  → Agregar producto
-DELETE /api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/products/{productId} → Eliminar producto
-PATCH  /api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/products/{productId}/stock → Actualizar stock
-```
-
-### Consultas especiales
-
-```
-GET /api/v1/reactive/franchese/{franchiseId}/products/mas-stock → Obtener productos con más stock por branch
-```
 
 ---
 
 ## 💻 Ejemplos con cURL
 
-### Crear una franchese
+## 📄 Ejemplo de request
 
+### Crear una franquicia
 ```bash
-curl -X POST http://localhost:8080/api/v1/reactive/franchese \
-  -H "Content-Type: application/json" \
-  -d '{
+curl -X POST http://localhost:8080/api/v1/franchese   -H "Content-Type: application/json"   -d '{
     "name": "TechStore"
-}'
+  }'
 ```
 
-### Agregar un branch
-
+### Agregar sucursal
 ```bash
-curl -X POST http://localhost:8080/api/v1/reactive/franchese/{franchiseId}/branches \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Branch Norte"
-}'
+curl -X POST http://localhost:8080/api/v1/franchese/{franchiseId}/branches   -H "Content-Type: application/json"   -d '{
+    "name": "Sucursal Norte"
+  }'
 ```
 
-### Agregar un producto
-
+### Agregar producto
 ```bash
-curl -X POST http://localhost:8080/api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/products \
-  -H "Content-Type: application/json" \
-  -d '{
+curl -X POST http://localhost:8080/api/v1/franchese/{franchiseId}/branches/{branchId}/products   -H "Content-Type: application/json"   -d '{
     "name": "Laptop Dell",
     "count": 25
-}'
-```
-
-### Actualizar stock de producto
-
-```bash
-curl -X PATCH http://localhost:8080/api/v1/reactive/franchese/{franchiseId}/branches/{branchId}/products/{productId}/stock \
-  -H "Content-Type: application/json" \
-  -d '{
-    "newCount": 100
-}'
+  }'
 ```
 
 ---
 
+## 🧪 Pruebas y cobertura JaCoCo
+
+### Ejecutar pruebas
+```bash
+mvn clean verify
+```
+
+### Generar reporte de cobertura
+```bash
+mvn jacoco:report
+```
+
+---
+## 🧱 Tecnologías principales
+
+| Capa | Tecnología |
+|------|-------------|
+| Dominio | Java 17, POJOs, Exceptions |
+| Casos de uso | Spring Reactor, Mockito |
+| Entradas | Spring WebFlux, Validation, DTOs |
+| Salidas | MongoDB Reactive, Spring Data |
+| Tests | JUnit 5, Mockito, Reactor Test |
+| Cobertura | JaCoCo |
+| Build | Maven multimódulo |
+| Infraestructura | Docker, Docker Compose |
+
+---
+
+## 🧰 Docker Compose (Mongo + App)
+
+```bash
+docker-compose up --build
+```
+
+Acceder a:
+- API → [http://localhost:8080](http://localhost:8080)
+- Mongo Express → [http://localhost:8081](http://localhost:8081)
+
+---
 ## 🧠 Patrones y principios aplicados
 
 * **SOLID**
@@ -187,31 +207,12 @@ docker-compose logs -f app
 
 ---
 
-## 🚀 Posibles Mejoras Futuras
 
-### 🧱 Implementación de manejo de errores global
-- Agregar una clase `@RestControllerAdvice` para capturar excepciones globales.
-- Responder con estructuras uniformes de error (`timestamp`, `status`, `message`, `path`).
-- Definir errores personalizados como `BusinessException` y `NotFoundException`.
+## 🚀 Próximas mejoras
 
-### 🧪 Integración de JaCoCo y pruebas unitarias
-- Configurar el plugin **JaCoCo** en el `pom.xml` para generar reportes de cobertura.
-- Implementar pruebas unitarias con **JUnit5** y **Mockito** en servicios y controladores.
-- Configurar un umbral mínimo de cobertura (por ejemplo, 90%).
-
-### 🔄 Configuración de despliegue continuo (CI/CD)
-- Crear un workflow en **GitHub Actions** o **Jenkinsfile** para:
-    - Ejecutar pruebas automáticas en cada `push` o `pull request`.
-    - Generar y publicar reportes de cobertura con JaCoCo.
-    - Construir y desplegar automáticamente la aplicación en entornos de prueba o producción usando Docker o Kubernetes.
-
----
-
-### 📈 Implementación de HATEOAS para monitoreo
-- Incorporar **HATEOAS** (Hypermedia as the Engine of Application State) para enriquecer las respuestas de la API.
-- Añadir enlaces contextuales que permitan navegar entre recursos relacionados (por ejemplo, `self`, `branches`, `products`).
-- Utilizar **Spring HATEOAS** para mejorar la observabilidad y trazabilidad de las relaciones entre entidades.
-
----
+- 🔐 Autenticación y autorización (JWT).
+- 📊 Métricas y observabilidad (Micrometer / Prometheus).
+- ☁️ Pipeline CI/CD (GitHub Actions).
+- 🧩 Integración con HATEOAS para navegabilidad entre recursos.
 
 © 2025 - Proyecto Reactivo de Gestión de **Franchese**

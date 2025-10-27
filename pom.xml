@@ -1,8 +1,6 @@
-<!-- test_nequi_Seti/pom.xml -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.seti.nequi.test</groupId>
@@ -21,7 +19,7 @@
 		<mockito.version>5.13.0</mockito.version>
 		<reactor.test.version>3.6.9</reactor.test.version>
 		<jacoco.version>0.8.12</jacoco.version>
-		<coverage.minimum>0.80</coverage.minimum> <!-- 80% -->
+		<coverage.minimum>0.80</coverage.minimum>
 	</properties>
 
 	<modules>
@@ -49,7 +47,14 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!-- En el parent solo definimos configuración común -->
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring.boot.version}</version>
+				</plugin>
+
+				<!-- Compilación -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -60,13 +65,8 @@
 						<parameters>true</parameters>
 					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.8.12</version>
-				</plugin>
 
-				<!-- JUnit 5 -->
+				<!-- Ejecución de tests con JUnit 5 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -76,65 +76,11 @@
 					</configuration>
 				</plugin>
 
-				<!-- JaCoCo: prepara agente en test y falla si < 80% -->
+				<!-- Configuración centralizada de JaCoCo -->
 				<plugin>
 					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
+					<artifactId>c</artifactId>
 					<version>${jacoco.version}</version>
-					<executions>
-						<execution>
-							<id>prepare-agent</id>
-							<goals><goal>prepare-agent</goal></goals>
-						</execution>
-						<execution>
-							<id>report</id>
-							<phase>verify</phase>
-							<goals><goal>report</goal></goals>
-						</execution>
-						<execution>
-							<id>check</id>
-							<phase>verify</phase>
-							<goals><goal>check</goal></goals>
-							<configuration>
-								<rules>
-									<rule>
-										<element>BUNDLE</element>
-										<limits>
-											<limit>
-												<counter>INSTRUCTION</counter>
-												<value>COVEREDRATIO</value>
-												<minimum>${coverage.minimum}</minimum>
-											</limit>
-										</limits>
-									</rule>
-								</rules>
-								<!-- Excluye lo que no aporta (clase main y config simple) -->
-								<excludes>
-									<exclude>**/Application.class</exclude>
-									<exclude>**/UseCaseConfig.class</exclude>
-								</excludes>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>${jacoco.version}</version>
-					<executions>
-						<execution>
-							<id>report-aggregate</id>
-							<phase>verify</phase>
-							<goals><goal>report-aggregate</goal></goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.8.12</version>
-
 					<executions>
 						<!-- Activa el agente JaCoCo al correr los tests -->
 						<execution>
@@ -144,7 +90,7 @@
 							</goals>
 						</execution>
 
-						<!-- Genera el reporte HTML al final de verify -->
+						<!-- Genera el reporte HTML -->
 						<execution>
 							<id>report</id>
 							<phase>verify</phase>
@@ -153,7 +99,7 @@
 							</goals>
 						</execution>
 
-						<!-- (Opcional) Valida umbral mínimo de cobertura -->
+						<!-- Valida cobertura mínima -->
 						<execution>
 							<id>check</id>
 							<phase>verify</phase>
@@ -168,7 +114,7 @@
 											<limit>
 												<counter>INSTRUCTION</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.80</minimum>
+												<minimum>${coverage.minimum}</minimum>
 											</limit>
 										</limits>
 									</rule>
@@ -179,13 +125,8 @@
 								</excludes>
 							</configuration>
 						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.8.12</version>
-					<executions>
+
+						<!-- Reporte agregado para módulos -->
 						<execution>
 							<id>report-aggregate</id>
 							<phase>verify</phase>
