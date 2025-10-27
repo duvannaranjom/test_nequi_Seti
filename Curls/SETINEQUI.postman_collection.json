@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": \"franq-003\",\r\n  \"name\": \"Franquicia FitLife Market\",\r\n  \"branches\": [\r\n    {\r\n      \"id\": \"suc-005\",\r\n      \"name\": \"Sucursal Parque Bolívar\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-012\",\r\n          \"name\": \"Batido Proteico de Vainilla\",\r\n          \"stock\": 75\r\n        },\r\n        {\r\n          \"id\": \"prod-013\",\r\n          \"name\": \"Barra Energética Natural\",\r\n          \"stock\": 120\r\n        },\r\n        {\r\n          \"id\": \"prod-014\",\r\n          \"name\": \"Agua de Coco 500ml\",\r\n          \"stock\": 200\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"suc-006\",\r\n      \"name\": \"Sucursal San Antonio\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-015\",\r\n          \"name\": \"Suplemento de Colágeno\",\r\n          \"stock\": 40\r\n        },\r\n        {\r\n          \"id\": \"prod-016\",\r\n          \"name\": \"Proteína Vegana Chocolate\",\r\n          \"stock\": 60\r\n        },\r\n        {\r\n          \"id\": \"prod-017\",\r\n          \"name\": \"Galletas de Avena Fit\",\r\n          \"stock\": 150\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+					"raw": "{\r\n  \"id\": \"franq-004\",\r\n  \"name\": \"Franquicia FitLife Market\",\r\n  \"branches\": [\r\n    {\r\n      \"id\": \"suc-005\",\r\n      \"name\": \"Sucursal Parque Bolívar\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-012\",\r\n          \"name\": \"Batido Proteico de Vainilla\",\r\n          \"stock\": 75\r\n        },\r\n        {\r\n          \"id\": \"prod-013\",\r\n          \"name\": \"Barra Energética Natural\",\r\n          \"stock\": 120\r\n        },\r\n        {\r\n          \"id\": \"prod-014\",\r\n          \"name\": \"Agua de Coco 500ml\",\r\n          \"stock\": 200\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"suc-006\",\r\n      \"name\": \"Sucursal San Antonio\",\r\n      \"products\": [\r\n        {\r\n          \"id\": \"prod-015\",\r\n          \"name\": \"Suplemento de Colágeno\",\r\n          \"stock\": 40\r\n        },\r\n        {\r\n          \"id\": \"prod-016\",\r\n          \"name\": \"Proteína Vegana Chocolate\",\r\n          \"stock\": 60\r\n        },\r\n        {\r\n          \"id\": \"prod-017\",\r\n          \"name\": \"Galletas de Avena Fit\",\r\n          \"stock\": 150\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Franquicia FitLife Market\"\r\n}\r\n",
+					"raw": "{\r\n  \"name\": \"\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,7 +113,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/franchese/franq-003/branches/suc-004/products",
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003/branches/suc-006/products",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -125,7 +125,7 @@
 						"franchese",
 						"franq-003",
 						"branches",
-						"suc-004",
+						"suc-006",
 						"products"
 					]
 				}
@@ -416,7 +416,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"franq-004\",\r\n    \"name\": \"Franquicia FitLife CC\",\r\n    \"branches\": [\r\n        {\r\n            \"id\": \"suc-005\",\r\n            \"name\": \"Sucursal Parque Avenida America\",\r\n            \"products\": [\r\n                {\r\n                    \"id\": \"prod-012\",\r\n                    \"name\": \"Batido Proteico de Vainilla\",\r\n                    \"stock\": 95\r\n                },\r\n                {\r\n                    \"id\": \"prod-013\",\r\n                    \"name\": \"Barra Energética Natural\",\r\n                    \"stock\": 120\r\n                },\r\n                {\r\n                    \"id\": \"prod-014\",\r\n                    \"name\": \"Agua de Coco 500ml\",\r\n                    \"stock\": 200\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"suc-006\",\r\n            \"name\": \"Sucursal San Antonio\",\r\n            \"products\": [\r\n                {\r\n                    \"id\": \"prod-015\",\r\n                    \"name\": \"Suplemento de Colágeno\",\r\n                    \"stock\": 40\r\n                },\r\n                {\r\n                    \"id\": \"prod-016\",\r\n                    \"name\": \"Proteína Vegana Chocolate\",\r\n                    \"stock\": 60\r\n                },\r\n                {\r\n                    \"id\": \"prod-017\",\r\n                    \"name\": \"Galletas de Avena Fit\",\r\n                    \"stock\": 150\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"id\": \"franq-003\",\r\n    \"name\": \"Franquicia FitLife CCs\",\r\n    \"branches\": [\r\n        {\r\n            \"id\": \"suc-005\",\r\n            \"name\": \"Sucursal Parque Avenida America\",\r\n            \"products\": [\r\n                {\r\n                    \"id\": \"prod-012\",\r\n                    \"name\": \"Batido Proteico de Vainilla\",\r\n                    \"stock\": 95\r\n                },\r\n                {\r\n                    \"id\": \"prod-013\",\r\n                    \"name\": \"Barra Energética Natural\",\r\n                    \"stock\": 120\r\n                },\r\n                {\r\n                    \"id\": \"prod-014\",\r\n                    \"name\": \"Agua de Coco 500ml\",\r\n                    \"stock\": 200\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"suc-006\",\r\n            \"name\": \"Sucursal San Antonio\",\r\n            \"products\": [\r\n                {\r\n                    \"id\": \"prod-015\",\r\n                    \"name\": \"Suplemento de Colágeno\",\r\n                    \"stock\": 40\r\n                },\r\n                {\r\n                    \"id\": \"prod-016\",\r\n                    \"name\": \"Proteína Vegana Chocolate\",\r\n                    \"stock\": 60\r\n                },\r\n                {\r\n                    \"id\": \"prod-017\",\r\n                    \"name\": \"Galletas de Avena Fit\",\r\n                    \"stock\": 150\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -424,7 +424,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/reactive/franquicias/franq-004",
+					"raw": "http://localhost:8080/api/v1/franchese/franq-003",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -433,9 +433,8 @@
 					"path": [
 						"api",
 						"v1",
-						"reactive",
-						"franquicias",
-						"franq-004"
+						"franchese",
+						"franq-003"
 					]
 				}
 			},
